@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Christina</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <!-- Header with Sticky Menu -->
+    <header id="home" class="hero-band">
+        <!-- Name + Title -->
+        <div class="hero-title">
+            <span class="name">Christina Tillery</span>
+            <span class="pipe">|</span>
+            <span class="subtitle">Full-Stack Developer</span>
+        </div>
+
+        <!-- Nav menu -->
+        <nav class="nav-bottom">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="contact-section">
+        <div class="contact-container">
+            <h2 id="contact-heading">Let's Work Together!</h2>
+            <p id="contact-subtext">I'd love to hear from you.</p>
+
+            <form action="https://formspree.io/f/mwpbbnpo" method="POST" class="contact-form" id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="thank-you-message" class="hidden">
+                <h2>Thank You for reaching out!</h2>
+                <p>Your message was sent successfully. I'll be in touch soon.</p>
+            </div>
+            <div class="connect-section">
+                <h3>Connect With Me</h3>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/christinadtillery/" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/ChristinaTillery" target="_blank">GitHub</a>
+                    <a href="/assets/resume.pdf" target="_blank">Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </section>
+    <script>
+        const form = document.getElementById("contact-form");
+        const thankYou = document.getElementById("thank-you-message");
+        const contactHeading = document.getElementById("contact-heading");
+        const contactSubtext = document.getElementById("contact-subtext");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                form.classList.add("hide");
+                thankYou.classList.add("show");
+
+                //Hide the top heading and subtext
+                contactHeading.style.display = "none";
+                contactSubtext.style.display = "none";
+            } else {
+                alert("Oops! Something went wrong. Please try again later.");
+            }
+        });
+    </script>
+</body>
